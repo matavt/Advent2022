@@ -30,3 +30,9 @@ line_parser = lParser()
 def get_line():
     global line_parser
     return next(line_parser)
+
+def main():
+    return
+
+if __name__ == ("__main__"):
+    main()
