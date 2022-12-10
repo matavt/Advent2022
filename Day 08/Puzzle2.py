@@ -17,13 +17,14 @@ def main():
     width = len(forest)
     global height
     height = len(forest[0])
-    visCount = (width + height -2) * 2
+    maxView = 0
     for i in range(1,width-1):
         for j in range(1,height-1):
-            if checkVis(i,j):
-                visCount += 1
+            viewDist = checkVis(i,j)
+            if viewDist > maxView:
+                maxView = viewDist
     
-    print(visCount)
+    print(maxView)
 
 def checkVis(y,x):
 
@@ -32,43 +33,42 @@ def checkVis(y,x):
     global height
     
     #check left
-    vis = True
-    for i in range(x-1,-1,-1):
+    left = 0
+    i =  x-1
+    while i > -1:
+        left += 1
         if forest[y][x] <= forest[y][i]:
-            vis = False
             i = -1
-    if vis:
-        return True
-    
-    #check right
-    vis = True
-    for i in range(x+1,width):
-        if forest[y][x] <= forest[y][i]:
-            vis = False
-            i = width
-    if vis:
-        return True
-        
-    #check up    
-    vis = True
-    for i in range(y-1,-1,-1):
-        if forest[y][x] <= forest[i][x]:
-            vis = False
-            i = -2
-    if vis:
-        return True
+        i -= 1
 
-    #check down
-    vis = True
-    for i in range(y+1,height):
-        if forest[y][x] <= forest[i][x]:
-            vis = False
-            i = height + 1
-    if vis:
-        return True
+    #check right
+    right = 0
+    i = x+1
+    while i < width:
+        right += 1
+        if forest[y][x] <= forest[y][i]:
+            i = width
+        i += 1
     
-    #can't be seen
-    return False
+    #check up    
+    up = 0
+    i = y - 1
+    while i > -1:
+        up += 1
+        if forest[y][x] <= forest[i][x]:
+            i = -1
+        i -= 1
+    
+    #check down
+    down = 0
+    i = y + 1
+    while i < height:
+        down += 1
+        if forest[y][x] <= forest[i][x]:
+            i = height
+        i += 1
+
+    return left * right * up * down
     
     
 
