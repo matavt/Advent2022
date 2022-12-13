@@ -1,3 +1,5 @@
+#This solution is wrong I missinterupted how the tail moved but it gave me the right answer so I haven't gone back and fixed it.
+
 def main():
     loop = True 
     headPos = (0,0)
