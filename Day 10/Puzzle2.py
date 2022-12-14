@@ -13,19 +13,18 @@ def main():
             display.drawPixels(xReg)
             xReg += int(command[1])     
         line = input()
-        print(xReg)
     display.createImage()
 
 
 class Display:
     def __init__(self):
         self.pixels = [["."for i in range(40)]for j in range(6)]
-        self.currentPixel = 1
+        self.currentPixel = 0
 
     def drawPixels(self,position):
         rowCol = divmod(self.currentPixel,40)
         if abs(position - rowCol[1]) <=1:
-            self.pixels[rowCol[0]][rowCol[1]-1] = "#"
+            self.pixels[rowCol[0]][rowCol[1]] = "#"
         self.currentPixel += 1
 
     def createImage(self):
